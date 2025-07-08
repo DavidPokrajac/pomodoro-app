@@ -1,0 +1,34 @@
+.timer-display-container {
+    background-color: var(--clr-blue-900);
+    color: var(--clr-blue-100);
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 100%;
+    padding: 22px;
+    filter: drop-shadow(-50px -50px 100px rgb(39, 44, 90))
+        drop-shadow(50px 50px 100px rgb(18, 21, 48));
+    background-image: linear-gradient(-90deg, #2e325a 0%, #0e112a 100%);
+}
+
+.timer-display-container__oval {
+    width: 366px;
+    aspect-ratio: 1 / 1;
+    align-content: center;
+    background-color: inherit;
+    border-radius: 100%;
+}
+
+.timer-display-container span {
+    display: block;
+}
+
+.timer-display-container__time {
+    font-size: 100px;
+    letter-spacing: -5px;
+}
+
+.timer-display-container__control {
+    text-transform: uppercase;
+    letter-spacing: 15px;
+}

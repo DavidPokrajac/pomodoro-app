@@ -1,0 +1,24 @@
+.button-container {
+    background-color: var(--clr-blue-900);
+    padding: 8px 10px;
+    border-radius: 31px;
+    font-size: 14px;
+}
+
+.button-container__button {
+    display: inline-block;
+    width: 120px;
+    padding-block: 16px;
+    border-radius: 26.5px;
+    border: none;
+    background-color: transparent;
+    color: var(--clr-blue-100);
+    opacity: 0.4;
+    font-weight: bold;
+}
+
+.button-container__button--active {
+    background-color: var(--clr-red-400);
+    color: var(--clr-blue-850);
+    opacity: 1;
+}
