@@ -8,8 +8,24 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    max-width: 410px;
+    /* max-width: 410px; */
     width: 95%;
     margin: 0 auto;
     font-family: var(--font-family-kumbh);
+    gap: 36px;
+    text-align: center;
+}
+
+.first-part {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    align-items: center;
+}
+
+.second-part {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    align-items: center;
 }

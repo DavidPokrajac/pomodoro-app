@@ -3,6 +3,8 @@
     padding: 8px 10px;
     border-radius: 31px;
     font-size: 14px;
+    position: relative;
+    z-index: 1;
 }
 
 .button-container__button {

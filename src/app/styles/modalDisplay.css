@@ -1,0 +1,189 @@
+.modal {
+    background-color: var(--clr-white);
+    border-radius: 25px;
+    width: 540px;
+    position: relative;
+    padding-block-end: 35px;
+}
+
+.modal__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+    border-bottom: 1px solid var(--clr-grey-200);
+}
+
+.modal__head__title {
+    font-size: 28px;
+}
+
+.modal__head__title,
+.modal__time-wrapper__title,
+.modal__font-wrapper__title,
+.modal__color-wrapper__title {
+    margin: 0;
+}
+
+.modal__time-wrapper__title,
+.modal__font-wrapper__title,
+.modal__color-wrapper__title {
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: var(--clr-blue-900);
+}
+
+.modal__time-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    text-align: start;
+    row-gap: 16px;
+    width: 480px;
+    margin: 0 auto;
+    padding-block: 32px;
+}
+
+.modal__time-wrapper__title {
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+}
+
+.modal__time-wrapper__options {
+    display: grid;
+    grid-row: 2 / 3;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    column-gap: 24px;
+}
+
+.modal__time-wrapper__options label {
+    color: var(--clr-blue-850);
+    opacity: 0.4;
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    margin-block-end: 8px;
+}
+
+.modal__time-wrapper__options input {
+    width: 100%;
+    background-color: var(--clr-blue-50);
+    color: var(--clr-blue-850);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    border: none;
+    border-radius: 10px;
+    appearance: textfield;
+    padding: 15px 18px;
+}
+
+.modal__font-wrapper,
+.modal__color-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 480px;
+    margin: 0 auto;
+    padding-block: 32px;
+    border-top: 1px solid var(--clr-grey-200);
+}
+
+.modal__font-wrapper__options > * + *,
+.modal__color-wrapper__options > * + * {
+    margin-left: 16px;
+}
+
+.modal__font-wrapper__options__button,
+.modal__color-wrapper__options__button {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: none;
+    background-color: var(--clr-blue-50);
+    color: var(--clr-blue-850);
+}
+
+.modal__font-wrapper__options__button--active {
+    background-color: var(--clr-blue-900);
+    color: var(--clr-white);
+}
+
+.modal__font-wrapper__options__button--kumbh {
+    font-family: var(--font-family-kumbh);
+    font-weight: bold;
+}
+
+.modal__font-wrapper__options__button--roboto-slab {
+    font-family: var(--font-family-roboto-slab);
+}
+
+.modal__font-wrapper__options__button--space-mono {
+    font-family: var(--font-family-space-mono);
+    font-weight: bold;
+}
+
+.modal__color-wrapper__options__button--red {
+    background-color: var(--clr-red-400);
+}
+
+.modal__color-wrapper__options__button--cyan {
+    background-color: var(--clr-cyan-300);
+}
+
+.modal__color-wrapper__options__button--magenta {
+    background-color: var(--clr-magenta-400);
+}
+
+.modal__apply-button {
+    display: inline-block;
+    padding: 18px 48px;
+    border-radius: 26px;
+    background-color: var(--clr-red-400);
+    color: var(--clr-white);
+    border: none;
+    position: absolute;
+    left: 50%;
+    top: calc(100% - 26.5px);
+    transform: translateX(-50%);
+    font-weight: bold;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper button {
+    position: absolute;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+}
+
+.input-wrapper .arrow-up-btn {
+    top: 25%;
+}
+
+.input-wrapper .arrow-down-btn {
+    top: 55%;
+}
+
+.modal__color-wrapper__options__button--active {
+    position: relative;
+}
+
+.modal__color-wrapper__options__button--active::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("../../../public/assets/check-mark.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 20px 15px;
+}

@@ -1,8 +1,15 @@
 :root {
+    --clr-blue-50: rgb(239, 241, 250);
     --clr-blue-100: rgb(215, 224, 255);
     --clr-blue-850: rgb(30, 33, 63);
     --clr-blue-900: rgb(22, 25, 50);
+    --clr-cyan-300: rgb(112, 243, 248);
+    --clr-grey-200: rgb(228, 226, 226);
+    --clr-magenta-400: rgb(216, 129, 248);
     --clr-red-400: rgb(248, 112, 112);
+    --clr-white: rgb(255, 255, 255);
 
     --font-family-kumbh: "Kumbh Sans", sans-serif;
+    --font-family-roboto-slab: "Roboto Slab", serif;
+    --font-family-space-mono: "Space Mono", monospace;
 }
