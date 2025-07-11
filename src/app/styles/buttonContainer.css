@@ -20,7 +20,18 @@
 }
 
 .button-container__button--active {
-    background-color: var(--clr-red-400);
     color: var(--clr-blue-850);
     opacity: 1;
+}
+
+.button-container__button--active.red {
+    background-color: var(--clr-red-400);
+}
+
+.button-container__button--active.cyan {
+    background-color: var(--clr-cyan-300);
+}
+
+.button-container__button--active.magenta {
+    background-color: var(--clr-magenta-400);
 }
