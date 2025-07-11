@@ -35,3 +35,9 @@
 .button-container__button--active.magenta {
     background-color: var(--clr-magenta-400);
 }
+
+.button-container__button:hover:not(.button-container__button--active) {
+    color: var(--clr-blue-100);
+    opacity: 1;
+    cursor: pointer;
+}

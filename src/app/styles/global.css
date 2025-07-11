@@ -40,6 +40,8 @@ button {
     border: none;
 }
 
-.second-part button:hover img {
-    fill: var(--clr-blue-100);
+.second-part button:hover path {
+    color: var(--clr-blue-100);
+    opacity: 1;
+    cursor: pointer;
 }

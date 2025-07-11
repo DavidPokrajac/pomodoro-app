@@ -18,6 +18,11 @@
     font-size: 28px;
 }
 
+.modal__head button:hover path {
+    cursor: pointer;
+    stroke: #979797;
+}
+
 .modal__head__title,
 .modal__time-wrapper__title,
 .modal__font-wrapper__title,
@@ -150,6 +155,10 @@
     font-weight: bold;
 }
 
+.modal__apply-button:hover {
+    cursor: pointer;
+}
+
 .input-wrapper {
     position: relative;
 }
@@ -169,6 +178,13 @@
     top: 55%;
 }
 
+.arrow-up-btn:hover path,
+.arrow-down-btn:hover path {
+    cursor: pointer;
+    stroke: var(--clr-blue-850);
+    stroke-opacity: 1;
+}
+
 .modal__color-wrapper__options__button--active {
     position: relative;
 }
@@ -186,4 +202,11 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 20px 15px;
+}
+
+.modal__font-wrapper__options__button:hover,
+.modal__color-wrapper__options__button:hover {
+    cursor: pointer;
+    outline: 1px solid var(--clr-blue-50);
+    outline-offset: 5px;
 }

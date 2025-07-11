@@ -2,13 +2,18 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import closeIcon from "../../../public/assets/icon-close.svg";
-import arrowUp from "../../../public/assets/icon-arrow-up.svg";
-import arrowDown from "../../../public/assets/icon-arrow-down.svg";
+// import Image from "next/image";
+// import closeIcon from "../../../public/assets/icon-close.svg";
+// import arrowUp from "../../../public/assets/icon-arrow-up.svg";
+// import arrowDown from "../../../public/assets/icon-arrow-down.svg";
 import { useUpdateStore } from "../stores/useUpdateStore";
 import { useResetStore } from "../stores/useResetStore";
 import { useTimeStore } from "../stores/useTimeStore";
+import { useActiveColorStore } from "../stores/useActiveColorStore";
+import { useActiveFontFamilyStore } from "../stores/useActiveFontFamilyStore";
+import { ArrowDownIcon } from "./ArrowDownIcon";
+import { ArrowUpIcon } from "./ArrowUpIcon";
+import { TimesIcon } from "./TimesIcon";
 
 export default function ModalDisplay() {
     const activeTimes = useUpdateStore((state) => state.times);
@@ -21,8 +26,22 @@ export default function ModalDisplay() {
         longBreakMinutes:
             activeTimes?.longBreakMinutes ?? initialTimes.longBreakMinutes,
     });
-    const [activeColor, setActiveColor] = useState<string>("red");
-    const [activeFont, setActiveFont] = useState<string>("--font-kumbh-sans");
+
+    const activeColor = useUpdateStore((state) => state.activeColor);
+    const initialActiveColor = useActiveColorStore(
+        (state) => state.activeColor
+    );
+    const [activeClr, setActiveColor] = useState<string>(
+        activeColor ?? initialActiveColor
+    );
+
+    const activeFont = useUpdateStore((state) => state.activeFont);
+    const initialActiveFontFamily = useActiveFontFamilyStore(
+        (state) => state.activeFontFamily
+    );
+    const [activeFFamily, setActiveFont] = useState<string>(
+        activeFont ?? initialActiveFontFamily
+    );
 
     const closeModal = useUpdateStore((state: any) => state.closeModal);
     const closeModalAndReset = useResetStore(
@@ -34,7 +53,7 @@ export default function ModalDisplay() {
             <div className="modal__head">
                 <h2 className="modal__head__title">Settings</h2>
                 <button onClick={() => closeModalAndReset()}>
-                    <Image src={closeIcon} alt="Close the modal" />
+                    <TimesIcon />
                 </button>
             </div>
             <div className="modal__time-wrapper">
@@ -62,7 +81,7 @@ export default function ModalDisplay() {
                                     })
                                 }
                             >
-                                <Image src={arrowUp} alt="" />
+                                <ArrowUpIcon />
                             </button>
                             <button
                                 className="arrow-down-btn"
@@ -76,7 +95,7 @@ export default function ModalDisplay() {
                                     })
                                 }
                             >
-                                <Image src={arrowDown} alt="" />
+                                <ArrowDownIcon />
                             </button>
                         </div>
                     </div>
@@ -102,7 +121,7 @@ export default function ModalDisplay() {
                                     })
                                 }
                             >
-                                <Image src={arrowUp} alt="" />
+                                <ArrowUpIcon />
                             </button>
                             <button
                                 className="arrow-down-btn"
@@ -116,7 +135,7 @@ export default function ModalDisplay() {
                                     })
                                 }
                             >
-                                <Image src={arrowDown} alt="" />
+                                <ArrowDownIcon />
                             </button>
                         </div>
                     </div>
@@ -142,7 +161,7 @@ export default function ModalDisplay() {
                                     })
                                 }
                             >
-                                <Image src={arrowUp} alt="" />
+                                <ArrowUpIcon />
                             </button>
                             <button
                                 className="arrow-down-btn"
@@ -156,7 +175,7 @@ export default function ModalDisplay() {
                                     })
                                 }
                             >
-                                <Image src={arrowDown} alt="" />
+                                <ArrowDownIcon />
                             </button>
                         </div>
                     </div>
@@ -167,7 +186,7 @@ export default function ModalDisplay() {
                 <div className="modal__font-wrapper__options">
                     <button
                         className={`modal__font-wrapper__options__button modal__font-wrapper__options__button--kumbh ${
-                            activeFont.includes("kumbh") &&
+                            activeFFamily.includes("kumbh") &&
                             "modal__font-wrapper__options__button--active"
                         }`}
                         onClick={() => setActiveFont("--font-kumbh-sans")}
@@ -176,7 +195,7 @@ export default function ModalDisplay() {
                     </button>
                     <button
                         className={`modal__font-wrapper__options__button modal__font-wrapper__options__button--roboto-slab ${
-                            activeFont.includes("roboto-slab") &&
+                            activeFFamily.includes("roboto-slab") &&
                             "modal__font-wrapper__options__button--active"
                         }`}
                         onClick={() =>
@@ -187,7 +206,7 @@ export default function ModalDisplay() {
                     </button>
                     <button
                         className={`modal__font-wrapper__options__button modal__font-wrapper__options__button--space-mono ${
-                            activeFont.includes("space-mono") &&
+                            activeFFamily.includes("space-mono") &&
                             "modal__font-wrapper__options__button--active"
                         }`}
                         onClick={() => setActiveFont("--font-space-mono")}
@@ -201,21 +220,21 @@ export default function ModalDisplay() {
                 <div className="modal__color-wrapper__options">
                     <button
                         className={`modal__color-wrapper__options__button modal__color-wrapper__options__button--red ${
-                            activeColor === "red" &&
+                            activeClr === "red" &&
                             "modal__color-wrapper__options__button--active"
                         }`}
                         onClick={() => setActiveColor("red")}
                     ></button>
                     <button
                         className={`modal__color-wrapper__options__button modal__color-wrapper__options__button--cyan ${
-                            activeColor === "cyan" &&
+                            activeClr === "cyan" &&
                             "modal__color-wrapper__options__button--active"
                         }`}
                         onClick={() => setActiveColor("cyan")}
                     ></button>
                     <button
                         className={`modal__color-wrapper__options__button modal__color-wrapper__options__button--magenta ${
-                            activeColor === "magenta" &&
+                            activeClr === "magenta" &&
                             "modal__color-wrapper__options__button--active"
                         }`}
                         onClick={() => setActiveColor("magenta")}
@@ -224,7 +243,7 @@ export default function ModalDisplay() {
             </div>
             <button
                 className="modal__apply-button"
-                onClick={() => closeModal(activeColor, activeFont, times)}
+                onClick={() => closeModal(activeClr, activeFFamily, times)}
             >
                 Apply
             </button>

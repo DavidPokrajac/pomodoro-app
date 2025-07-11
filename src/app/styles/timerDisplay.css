@@ -32,3 +32,18 @@
     text-transform: uppercase;
     letter-spacing: 15px;
 }
+
+.timer-display-container__control.red:hover {
+    color: var(--clr-red-400);
+    cursor: pointer;
+}
+
+.timer-display-container__control.cyan:hover {
+    color: var(--clr-cyan-300);
+    cursor: pointer;
+}
+
+.timer-display-container__control.magenta:hover {
+    color: var(--clr-magenta-400);
+    cursor: pointer;
+}

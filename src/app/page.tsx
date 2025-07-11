@@ -4,13 +4,14 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import pomodoro from "../../public/assets/logo.svg";
-import settingsIcon from "../../public/assets/icon-settings.svg";
+// import settingsIcon from "../../public/assets/icon-settings.svg";
 import ButtonContainer from "./components/ButtonContainer";
 import TimerDisplay from "./components/TimerDisplay";
 import ModalDisplay from "./components/ModalDisplay";
 import { useModalOpenStore } from "./stores/useModalOpenStore";
 import { useUpdateStore } from "./stores/useUpdateStore";
 import { declareActiveFontFamily } from "./utils/helpers";
+import { SettingsIcon } from "./components/SettingsIcon";
 
 export default function Page() {
     const isModalOpen = useModalOpenStore((state: any) => state.isModalOpen);
@@ -41,7 +42,7 @@ export default function Page() {
                     <div className="second-part">
                         <TimerDisplay />
                         <button onClick={() => modalHandler()}>
-                            <Image src={settingsIcon} alt="click to modify" />
+                            <SettingsIcon />
                         </button>
                         {/* start pause restart Settings Time (minutes) pomodoro short break
                 long break Font Color Apply */}
