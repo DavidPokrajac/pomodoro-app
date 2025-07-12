@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect } from "react";
@@ -12,13 +11,19 @@ import { useModalOpenStore } from "./stores/useModalOpenStore";
 import { useUpdateStore } from "./stores/useUpdateStore";
 import { declareActiveFontFamily } from "./utils/helpers";
 import { SettingsIcon } from "./components/SettingsIcon";
+import { modalOpenStoreInterface } from "./types/modalOpenStoreInterface";
+import { updateStoreInterface } from "./types/updateStoreInterface";
 
 export default function Page() {
-    const isModalOpen = useModalOpenStore((state: any) => state.isModalOpen);
-    const modalHandler = useModalOpenStore((state: any) => state.modalHandler);
+    const isModalOpen = useModalOpenStore(
+        (state: modalOpenStoreInterface) => state.isModalOpen
+    );
+    const modalHandler = useModalOpenStore(
+        (state: modalOpenStoreInterface) => state.modalHandler
+    );
 
     const activeFontFamily = useUpdateStore(
-        (state: any) => state.activeFontFamily
+        (state: updateStoreInterface) => state.activeFontFamily
     );
 
     useEffect(() => {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -14,11 +13,19 @@ import { useActiveFontFamilyStore } from "../stores/useActiveFontFamilyStore";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { ArrowUpIcon } from "./ArrowUpIcon";
 import { TimesIcon } from "./TimesIcon";
+import { updateStoreInterface } from "../types/updateStoreInterface";
+import { resetStoreInterface } from "../types/resetStoreInterface";
+
+interface timeInterface {
+    pomodoroMinutes: number;
+    shortBreakMinutes: number;
+    longBreakMinutes: number;
+}
 
 export default function ModalDisplay() {
     const activeTimes = useUpdateStore((state) => state.times);
     const initialTimes = useTimeStore((state) => state.times);
-    const [times, setTimes] = useState<any>({
+    const [times, setTimes] = useState<timeInterface>({
         pomodoroMinutes:
             activeTimes?.pomodoroMinutes ?? initialTimes.pomodoroMinutes,
         shortBreakMinutes:
@@ -35,7 +42,7 @@ export default function ModalDisplay() {
         activeColor ?? initialActiveColor
     );
 
-    const activeFont = useUpdateStore((state) => state.activeFont);
+    const activeFont = useUpdateStore((state) => state.activeFontFamily);
     const initialActiveFontFamily = useActiveFontFamilyStore(
         (state) => state.activeFontFamily
     );
@@ -43,9 +50,11 @@ export default function ModalDisplay() {
         activeFont ?? initialActiveFontFamily
     );
 
-    const closeModal = useUpdateStore((state: any) => state.closeModal);
+    const closeModal = useUpdateStore(
+        (state: updateStoreInterface) => state.closeModal
+    );
     const closeModalAndReset = useResetStore(
-        (state: any) => state.closeModalAndReset
+        (state: resetStoreInterface) => state.closeModalAndReset
     );
 
     return (
@@ -72,7 +81,7 @@ export default function ModalDisplay() {
                             <button
                                 className="arrow-up-btn"
                                 onClick={() =>
-                                    setTimes((prevValue: any) => {
+                                    setTimes((prevValue: timeInterface) => {
                                         return {
                                             ...prevValue,
                                             pomodoroMinutes:
@@ -86,7 +95,7 @@ export default function ModalDisplay() {
                             <button
                                 className="arrow-down-btn"
                                 onClick={() =>
-                                    setTimes((prevValue: any) => {
+                                    setTimes((prevValue: timeInterface) => {
                                         return {
                                             ...prevValue,
                                             pomodoroMinutes:
@@ -112,7 +121,7 @@ export default function ModalDisplay() {
                             <button
                                 className="arrow-up-btn"
                                 onClick={() =>
-                                    setTimes((prevValue: any) => {
+                                    setTimes((prevValue: timeInterface) => {
                                         return {
                                             ...prevValue,
                                             shortBreakMinutes:
@@ -126,7 +135,7 @@ export default function ModalDisplay() {
                             <button
                                 className="arrow-down-btn"
                                 onClick={() =>
-                                    setTimes((prevValue: any) => {
+                                    setTimes((prevValue: timeInterface) => {
                                         return {
                                             ...prevValue,
                                             shortBreakMinutes:
@@ -152,7 +161,7 @@ export default function ModalDisplay() {
                             <button
                                 className="arrow-up-btn"
                                 onClick={() =>
-                                    setTimes((prevValue: any) => {
+                                    setTimes((prevValue: timeInterface) => {
                                         return {
                                             ...prevValue,
                                             longBreakMinutes:
@@ -166,7 +175,7 @@ export default function ModalDisplay() {
                             <button
                                 className="arrow-down-btn"
                                 onClick={() =>
-                                    setTimes((prevValue: any) => {
+                                    setTimes((prevValue: timeInterface) => {
                                         return {
                                             ...prevValue,
                                             longBreakMinutes:

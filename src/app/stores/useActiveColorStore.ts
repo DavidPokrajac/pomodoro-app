@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
+import { activeColorStoreInterface } from "../types/activeColorInterface";
 
-export const useActiveColorStore = create<any>(() => ({
+export const useActiveColorStore = create<activeColorStoreInterface>(() => ({
     activeColor: "red",
 }));

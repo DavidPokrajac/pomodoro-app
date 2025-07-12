@@ -1,12 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useActiveColorStore } from "../stores/useActiveColorStore";
 import { useActiveItemStore } from "../stores/useActiveItemStore";
+import { activeItemStoreInterface } from "../types/activeItemStoreInterface";
+import { activeColorStoreInterface } from "../types/activeColorInterface";
 
 export default function ButtonContainer() {
-    const activeColor = useActiveColorStore((state: any) => state.activeColor);
-    const activeItem = useActiveItemStore((state: any) => state.activeItem);
+    const activeColor = useActiveColorStore(
+        (state: activeColorStoreInterface) => state.activeColor
+    );
+    const activeItem = useActiveItemStore(
+        (state: activeItemStoreInterface) => state.activeItem
+    );
     const changeActiveItem = useActiveItemStore(
-        (state: any) => state.changeActiveItem
+        (state: activeItemStoreInterface) => state.changeActiveItem
     );
 
     return (
