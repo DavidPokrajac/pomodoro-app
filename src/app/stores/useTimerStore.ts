@@ -4,21 +4,25 @@ import { useTimeStore } from "./useTimeStore";
 import { declareActiveTime } from "../utils/helpers";
 import { useActiveItemStore } from "./useActiveItemStore";
 import { useUpdateStore } from "./useUpdateStore";
+import { useProgressValueStore } from "./useProgressValueStore";
 
 export const useTimerStore = create<any>((set) => ({
     isStarted: false,
     seconds: 59,
     status: "Start",
-    decreaseSeconds: (activeTime: any) =>
+    decreaseSeconds: (activeTime: any) => {
+        const active =
+            useTimeStore.getState().times[
+                activeTime as keyof {
+                    pomodoroMinutes: number;
+                    shortBreakMinutes: number;
+                    longBreakMinutes: number;
+                }
+            ];
+        useProgressValueStore.setState((prev: any) => ({
+            value: prev.value + 1,
+        }));
         set((prev: any) => {
-            const active =
-                useTimeStore.getState().times[
-                    activeTime as keyof {
-                        pomodoroMinutes: number;
-                        shortBreakMinutes: number;
-                        longBreakMinutes: number;
-                    }
-                ];
             if (prev.seconds === 0 && activeTime !== 0) {
                 useTimeStore.setState((prev: any) => {
                     return {
@@ -46,8 +50,12 @@ export const useTimerStore = create<any>((set) => ({
                     status: "Restart",
                 };
             }
-            return { ...prev, seconds: prev.seconds - 1 };
-        }),
+            return {
+                ...prev,
+                seconds: prev.seconds - 1,
+            };
+        });
+    },
     startTimer: () =>
         set((prev: any) => ({
             ...prev,
@@ -62,6 +70,7 @@ export const useTimerStore = create<any>((set) => ({
         })),
     restartTimer: () => {
         set((prev: any) => {
+            useProgressValueStore.setState({ value: 0 });
             useTimeStore.setState((prev: any) => {
                 const activeItem = useActiveItemStore.getState().activeItem;
                 const times = useUpdateStore.getState().times;

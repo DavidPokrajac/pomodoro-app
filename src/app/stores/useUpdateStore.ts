@@ -5,6 +5,7 @@ import { useModalOpenStore } from "./useModalOpenStore";
 import { useTimeStore } from "./useTimeStore";
 import { updateStoreInterface } from "../types/updateStoreInterface";
 import { useTimerStore } from "./useTimerStore";
+import { useProgressValueStore } from "./useProgressValueStore";
 
 export const useUpdateStore = create<updateStoreInterface>((set) => ({
     activeFontFamily: useActiveFontFamilyStore.getState().activeFontFamily,
@@ -25,6 +26,7 @@ export const useUpdateStore = create<updateStoreInterface>((set) => ({
             useActiveFontFamilyStore.setState({ activeFontFamily: activeFont });
             useTimeStore.setState({ times: times });
             useTimerStore.setState({ seconds: 59 });
+            useProgressValueStore.setState({ value: 0 });
             return {
                 activeFontFamily:
                     useActiveFontFamilyStore.getState().activeFontFamily,
