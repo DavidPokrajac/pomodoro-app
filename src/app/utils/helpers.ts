@@ -31,14 +31,31 @@ export const declareActiveFontFamily = (activeFontFamily: any): string => {
     return "";
 };
 
-export const declareActiveTime = (activeItem: any, times: any) => {
+export const declareActiveTime = (activeItem: any) => {
     if (activeItem === "pomodoro") {
-        return times.pomodoroMinutes;
+        return "pomodoroMinutes";
     }
     if (activeItem === "short-break") {
-        return times.shortBreakMinutes;
+        return "shortBreakMinutes";
     }
-    if (activeItem === "long-break") {
-        return times.longBreakMinutes;
+    return "longBreakMinutes";
+};
+
+export const populateWithZero = (time: number) => {
+    return time < 10 ? `0${time}` : time;
+};
+
+export const renderHandler = (
+    status: string,
+    restartHandler: any,
+    stopHandler: any,
+    startHandler: any
+) => {
+    if (status === "Restart") {
+        return () => restartHandler();
+    } else if (status === "Pause") {
+        return () => stopHandler();
+    } else if (status === "Start") {
+        return () => startHandler();
     }
 };

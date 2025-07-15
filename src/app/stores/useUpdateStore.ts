@@ -4,6 +4,7 @@ import { useActiveColorStore } from "./useActiveColorStore";
 import { useModalOpenStore } from "./useModalOpenStore";
 import { useTimeStore } from "./useTimeStore";
 import { updateStoreInterface } from "../types/updateStoreInterface";
+import { useTimerStore } from "./useTimerStore";
 
 export const useUpdateStore = create<updateStoreInterface>((set) => ({
     activeFontFamily: useActiveFontFamilyStore.getState().activeFontFamily,
@@ -23,6 +24,7 @@ export const useUpdateStore = create<updateStoreInterface>((set) => ({
             useActiveColorStore.setState({ activeColor: activeColor });
             useActiveFontFamilyStore.setState({ activeFontFamily: activeFont });
             useTimeStore.setState({ times: times });
+            useTimerStore.setState({ seconds: 59 });
             return {
                 activeFontFamily:
                     useActiveFontFamilyStore.getState().activeFontFamily,

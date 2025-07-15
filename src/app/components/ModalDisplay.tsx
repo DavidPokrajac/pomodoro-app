@@ -77,6 +77,7 @@ export default function ModalDisplay() {
                                 id="pomodoro"
                                 value={times.pomodoroMinutes}
                                 readOnly
+                                min={0}
                             />
                             <button
                                 className="arrow-up-btn"
@@ -103,6 +104,7 @@ export default function ModalDisplay() {
                                         };
                                     })
                                 }
+                                disabled={times.pomodoroMinutes <= 0}
                             >
                                 <ArrowDownIcon />
                             </button>
@@ -117,6 +119,7 @@ export default function ModalDisplay() {
                                 id="short-break"
                                 value={times.shortBreakMinutes}
                                 readOnly
+                                min={0}
                             />
                             <button
                                 className="arrow-up-btn"
@@ -143,6 +146,7 @@ export default function ModalDisplay() {
                                         };
                                     })
                                 }
+                                disabled={times.shortBreakMinutes <= 0}
                             >
                                 <ArrowDownIcon />
                             </button>
@@ -157,6 +161,7 @@ export default function ModalDisplay() {
                                 id="long-break"
                                 value={times.longBreakMinutes}
                                 readOnly
+                                min={0}
                             />
                             <button
                                 className="arrow-up-btn"
@@ -183,6 +188,7 @@ export default function ModalDisplay() {
                                         };
                                     })
                                 }
+                                disabled={times.longBreakMinutes <= 0}
                             >
                                 <ArrowDownIcon />
                             </button>
