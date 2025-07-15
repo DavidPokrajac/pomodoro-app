@@ -8,7 +8,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    /* max-width: 410px; */
+    max-width: 410px;
     width: 95%;
     margin: 0 auto;
     font-family: var(--font-family-kumbh);
@@ -44,4 +44,20 @@ button {
     color: var(--clr-blue-100);
     opacity: 1;
     cursor: pointer;
+}
+
+@media (max-width: 1092px) {
+    body {
+        justify-content: start;
+        margin-block-start: 80px;
+        gap: 108px;
+    }
+}
+
+@media (max-width: 676px) {
+    body {
+        justify-content: start;
+        margin-block-start: 32px;
+        gap: 47px;
+    }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export const declareActiveFn = (
     object: string,
     times: {
@@ -18,7 +17,7 @@ export const declareActiveFn = (
     }
 };
 
-export const declareActiveFontFamily = (activeFontFamily: any): string => {
+export const declareActiveFontFamily = (activeFontFamily: string): string => {
     if (activeFontFamily === "--font-kumbh-sans") {
         return "--font-kumbh-sans";
     }
@@ -31,7 +30,7 @@ export const declareActiveFontFamily = (activeFontFamily: any): string => {
     return "";
 };
 
-export const declareActiveTime = (activeItem: any) => {
+export const declareActiveTime = (activeItem: string) => {
     if (activeItem === "pomodoro") {
         return "pomodoroMinutes";
     }
@@ -47,9 +46,9 @@ export const populateWithZero = (time: number) => {
 
 export const renderHandler = (
     status: string,
-    restartHandler: any,
-    stopHandler: any,
-    startHandler: any
+    restartHandler: () => void,
+    stopHandler: () => void,
+    startHandler: () => void
 ) => {
     if (status === "Restart") {
         return () => restartHandler();
@@ -57,5 +56,19 @@ export const renderHandler = (
         return () => stopHandler();
     } else if (status === "Start") {
         return () => startHandler();
+    }
+};
+
+export const changeProgressbarColor = (activeColor: string) => {
+    switch (activeColor) {
+        case "red":
+            return "rgb(248, 112, 112)";
+            break;
+        case "cyan":
+            return "rgb(112, 243, 248)";
+            break;
+        case "magenta":
+            return "rgb(216, 129, 248)";
+            break;
     }
 };

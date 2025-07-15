@@ -12,7 +12,7 @@
 }
 
 .timer-display-container__oval {
-    width: 366px;
+    block-size: 366px;
     aspect-ratio: 1 / 1;
     align-content: center;
     background-color: inherit;
@@ -46,4 +46,19 @@
 .timer-display-container__control.magenta:hover {
     color: var(--clr-magenta-400);
     cursor: pointer;
+}
+
+@media (max-width: 676px) {
+    .timer-display-container__oval {
+        block-size: 300px;
+    }
+
+    .timer-display-container__time {
+        font-size: 80px;
+    }
+
+    .timer-display-container__control {
+        font-size: 14px;
+        letter-spacing: 13px;
+    }
 }

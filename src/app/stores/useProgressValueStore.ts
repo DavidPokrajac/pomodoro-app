@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
+import { progressValueStoreInterface } from "../types/progressValueStoreInterface";
 
-export const useProgressValueStore = create<any>(() => ({
-    value: 0,
-}));
+export const useProgressValueStore = create<progressValueStoreInterface>(
+    () => ({
+        value: 0,
+    })
+);

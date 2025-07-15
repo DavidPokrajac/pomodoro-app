@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import { useTimeStore } from "./useTimeStore";
 import { declareActiveTime } from "../utils/helpers";
 import { useActiveItemStore } from "./useActiveItemStore";
 import { useUpdateStore } from "./useUpdateStore";
 import { useProgressValueStore } from "./useProgressValueStore";
+import { timerStoreInterface } from "../types/timerStoreInterface";
 
-export const useTimerStore = create<any>((set) => ({
+export const useTimerStore = create<timerStoreInterface>((set) => ({
     isStarted: false,
     seconds: 59,
     status: "Start",
-    decreaseSeconds: (activeTime: any) => {
+    decreaseSeconds: (activeTime: string) => {
         const active =
             useTimeStore.getState().times[
                 activeTime as keyof {
@@ -19,12 +19,12 @@ export const useTimerStore = create<any>((set) => ({
                     longBreakMinutes: number;
                 }
             ];
-        useProgressValueStore.setState((prev: any) => ({
+        useProgressValueStore.setState((prev) => ({
             value: prev.value + 1,
         }));
-        set((prev: any) => {
-            if (prev.seconds === 0 && activeTime !== 0) {
-                useTimeStore.setState((prev: any) => {
+        set((prev) => {
+            if (prev.seconds === 0) {
+                useTimeStore.setState((prev) => {
                     return {
                         times: {
                             ...prev.times,
@@ -57,24 +57,24 @@ export const useTimerStore = create<any>((set) => ({
         });
     },
     startTimer: () =>
-        set((prev: any) => ({
+        set((prev) => ({
             ...prev,
             isStarted: true,
             status: "Pause",
         })),
     stopTimer: () =>
-        set((prev: any) => ({
+        set((prev) => ({
             ...prev,
             isStarted: false,
             status: "Start",
         })),
     restartTimer: () => {
-        set((prev: any) => {
+        set((prev) => {
             useProgressValueStore.setState({ value: 0 });
-            useTimeStore.setState((prev: any) => {
+            useTimeStore.setState((prev) => {
                 const activeItem = useActiveItemStore.getState().activeItem;
                 const times = useUpdateStore.getState().times;
-                console.log(times);
+
                 return {
                     times: {
                         ...prev.times,

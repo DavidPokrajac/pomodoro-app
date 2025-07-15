@@ -9,7 +9,7 @@
 
 .button-container__button {
     display: inline-block;
-    width: 120px;
+    inline-size: 120px;
     padding-block: 16px;
     border-radius: 26.5px;
     border: none;
@@ -40,4 +40,15 @@
     color: var(--clr-blue-100);
     opacity: 1;
     cursor: pointer;
+}
+
+@media (max-width: 676px) {
+    .button-container {
+        display: flex;
+        inline-size: 90%;
+    }
+
+    .button-container__button {
+        font-size: 12px;
+    }
 }

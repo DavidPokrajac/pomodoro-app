@@ -1,5 +1,6 @@
 export const TimesIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" role="img">
+        <title>Click to close modal</title>
         <path
             fill="#1E213F"
             fillRule="evenodd"

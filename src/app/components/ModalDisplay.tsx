@@ -1,10 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import Image from "next/image";
-// import closeIcon from "../../../public/assets/icon-close.svg";
-// import arrowUp from "../../../public/assets/icon-arrow-up.svg";
-// import arrowDown from "../../../public/assets/icon-arrow-down.svg";
 import { useUpdateStore } from "../stores/useUpdateStore";
 import { useResetStore } from "../stores/useResetStore";
 import { useTimeStore } from "../stores/useTimeStore";

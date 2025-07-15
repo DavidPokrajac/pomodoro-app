@@ -1,7 +1,11 @@
 import { useEffect, useRef } from "react";
 import { useTimeStore } from "../stores/useTimeStore";
 import { useActiveItemStore } from "../stores/useActiveItemStore";
-import { declareActiveTime, populateWithZero } from "../utils/helpers";
+import {
+    changeProgressbarColor,
+    declareActiveTime,
+    populateWithZero,
+} from "../utils/helpers";
 import { useActiveColorStore } from "../stores/useActiveColorStore";
 import { useTimerStore } from "../stores/useTimerStore";
 import { renderHandler } from "../utils/helpers";
@@ -56,10 +60,7 @@ export default function TimerDisplay() {
                     maxValue={100}
                     styles={{
                         path: {
-                            stroke:
-                                activeColor === "red"
-                                    ? "rgb(248, 112, 112)"
-                                    : activeColor,
+                            stroke: changeProgressbarColor(activeColor),
                             strokeWidth: 3,
                             strokeLinecap: "round",
                             transition: "stroke-dashoffset 0.5s ease-in-out",
