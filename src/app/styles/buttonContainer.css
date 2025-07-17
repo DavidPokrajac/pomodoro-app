@@ -53,6 +53,14 @@
     }
 }
 
-.button-container:has(> [disabled]) {
-    color: red;
+span.button-container__button {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    line-height: 1;
+    z-index: 2;
+}
+
+.btn-active {
+    color: transparent;
 }

@@ -3,6 +3,8 @@ import { useActiveItemStore } from "../stores/useActiveItemStore";
 import { activeItemStoreInterface } from "../types/activeItemStoreInterface";
 import { activeColorStoreInterface } from "../types/activeColorInterface";
 import { useTimerStore } from "../stores/useTimerStore";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function ButtonContainer() {
     const activeColor = useActiveColorStore(
@@ -20,15 +22,45 @@ export default function ButtonContainer() {
         changeActiveItem(activeItem);
     };
 
+    useGSAP(() => {
+        const mm = gsap.matchMedia();
+
+        if (activeItem === "pomodoro") {
+            gsap.to("span.button-container__button", {
+                left: 10,
+            });
+        }
+        if (activeItem === "short-break") {
+            mm.add("(min-width: 767px)", () => {
+                gsap.to("span.button-container__button", {
+                    left: "35%",
+                });
+            });
+            mm.add("(max-width: 767px)", () => {
+                gsap.to("span.button-container__button", {
+                    left: "32.5%",
+                });
+            });
+        }
+        if (activeItem === "long-break") {
+            gsap.to("span.button-container__button", {
+                left: "calc(100% - 130px)",
+            });
+        }
+    }, [activeItem]);
+
     return (
         <div className="button-container">
+            <span
+                className={`button-container__button button-container__button--active ${activeColor}`}
+            >
+                {activeItem}
+            </span>
             <button
                 onClick={() => changeActiveBtnHandler("pomodoro")}
                 className={`button-container__button ${
-                    activeItem === "pomodoro"
-                        ? "button-container__button--active"
-                        : ""
-                } ${activeColor}`}
+                    activeItem === "pomodoro" ? "text-transparent" : ""
+                }`}
                 disabled={isStarted ? true : false}
             >
                 pomodoro
@@ -36,10 +68,8 @@ export default function ButtonContainer() {
             <button
                 onClick={() => changeActiveBtnHandler("short-break")}
                 className={`button-container__button ${
-                    activeItem === "short-break"
-                        ? "button-container__button--active"
-                        : ""
-                } ${activeColor}`}
+                    activeItem === "short-break" ? "text-transparent" : ""
+                }`}
                 disabled={isStarted ? true : false}
             >
                 short break
@@ -47,10 +77,8 @@ export default function ButtonContainer() {
             <button
                 onClick={() => changeActiveBtnHandler("long-break")}
                 className={`button-container__button ${
-                    activeItem === "long-break"
-                        ? "button-container__button--active"
-                        : ""
-                } ${activeColor}`}
+                    activeItem === "long-break" ? "text-transparent" : ""
+                }`}
                 disabled={isStarted}
             >
                 long break
