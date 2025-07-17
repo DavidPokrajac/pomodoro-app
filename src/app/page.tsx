@@ -12,6 +12,7 @@ import { declareActiveFontFamily } from "./utils/helpers";
 import { SettingsIcon } from "./components/SettingsIcon";
 import { modalOpenStoreInterface } from "./types/modalOpenStoreInterface";
 import { updateStoreInterface } from "./types/updateStoreInterface";
+import { useTimerStore } from "./stores/useTimerStore";
 
 export default function Page() {
     const isModalOpen = useModalOpenStore(
@@ -24,6 +25,8 @@ export default function Page() {
     const activeFontFamily = useUpdateStore(
         (state: updateStoreInterface) => state.activeFontFamily
     );
+
+    const isStarted = useTimerStore((state) => state.isStarted);
 
     useEffect(() => {
         document.querySelector(
@@ -45,7 +48,10 @@ export default function Page() {
                     </div>
                     <div className="second-part">
                         <TimerDisplay />
-                        <button onClick={() => modalHandler()}>
+                        <button
+                            onClick={() => modalHandler()}
+                            disabled={isStarted ? true : false}
+                        >
                             <SettingsIcon />
                         </button>
                     </div>

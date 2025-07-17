@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useTimeStore } from "../stores/useTimeStore";
 import { useActiveItemStore } from "../stores/useActiveItemStore";
 import {
     changeProgressbarColor,
@@ -11,12 +10,18 @@ import { useTimerStore } from "../stores/useTimerStore";
 import { renderHandler } from "../utils/helpers";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { useProgressValueStore } from "../stores/useProgressValueStore";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useUpdateStore } from "../stores/useUpdateStore";
+import { useTimeStore } from "../stores/useTimeStore";
+
+gsap.registerPlugin(useGSAP);
 
 export default function TimerDisplay() {
     const activeItem = useActiveItemStore(
         (state: { activeItem: string }) => state.activeItem
     );
-    const times = useTimeStore(
+    const times = useUpdateStore(
         (state: {
             times: {
                 pomodoroMinutes: number;
@@ -40,6 +45,7 @@ export default function TimerDisplay() {
 
     const activeTime = declareActiveTime(activeItem);
     const overall = times[activeTime] * 60 + 59;
+
     useEffect(() => {
         if (isStarted) {
             intervalRef.current = setInterval(() => {
@@ -50,6 +56,33 @@ export default function TimerDisplay() {
             clearInterval(intervalRef.current);
         }
     }, [isStarted, decreaseSeconds, activeTime, activeItem]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            document.querySelector<HTMLSpanElement>(
+                ".timer-display-container__control"
+            )!.innerText = status;
+        }, 500);
+    }, [status]);
+
+    useGSAP(() => {
+        const tl = gsap.timeline();
+        tl.to(".timer-display-container__control", {
+            y: 50,
+            opacity: 0,
+            duration: 0.25,
+        });
+        tl.to(".timer-display-container__control", {
+            y: -50,
+            opacity: 0,
+            duration: 0.25,
+        });
+        tl.to(".timer-display-container__control", {
+            y: 0,
+            opacity: 1,
+            duration: 0.25,
+        });
+    }, [status]);
 
     return (
         <div className="timer-display-container">
@@ -68,8 +101,10 @@ export default function TimerDisplay() {
                     }}
                 >
                     <span className="timer-display-container__time">
-                        {populateWithZero(times[activeTime])}:
-                        {populateWithZero(seconds)}
+                        {populateWithZero(
+                            useTimeStore.getState().times[activeTime]
+                        )}
+                        :{populateWithZero(seconds)}
                     </span>
                     <span
                         className={`timer-display-container__control ${activeColor}`}
@@ -80,7 +115,7 @@ export default function TimerDisplay() {
                             startTimer
                         )}
                     >
-                        {status}
+                        <span>{status}</span>
                     </span>
                 </CircularProgressbarWithChildren>
             </div>

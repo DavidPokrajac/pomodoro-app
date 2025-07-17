@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUpdateStore } from "../stores/useUpdateStore";
 import { useResetStore } from "../stores/useResetStore";
 import { useTimeStore } from "../stores/useTimeStore";
 import { useActiveColorStore } from "../stores/useActiveColorStore";
 import { useActiveFontFamilyStore } from "../stores/useActiveFontFamilyStore";
+import { useModalOpenStore } from "../stores/useModalOpenStore";
 import { ArrowDownIcon } from "./ArrowDownIcon";
 import { ArrowUpIcon } from "./ArrowUpIcon";
 import { TimesIcon } from "./TimesIcon";
 import { updateStoreInterface } from "../types/updateStoreInterface";
 import { resetStoreInterface } from "../types/resetStoreInterface";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 interface timeInterface {
     pomodoroMinutes: number;
@@ -29,6 +34,8 @@ export default function ModalDisplay() {
         longBreakMinutes:
             activeTimes?.longBreakMinutes ?? initialTimes.longBreakMinutes,
     });
+
+    const isModalOpen = useModalOpenStore((state) => state.isModalOpen);
 
     const activeColor = useUpdateStore((state) => state.activeColor);
     const initialActiveColor = useActiveColorStore(
@@ -52,6 +59,33 @@ export default function ModalDisplay() {
     const closeModalAndReset = useResetStore(
         (state: resetStoreInterface) => state.closeModalAndReset
     );
+
+    useEffect(() => {
+        if (!isModalOpen) {
+            setTimeout(() => {
+                document.querySelector<HTMLDivElement>(
+                    ".modal"
+                )!.style.display = "none";
+            }, 500);
+        }
+    }, [isModalOpen]);
+
+    useGSAP(() => {
+        const tl = gsap.timeline();
+        if (isModalOpen) {
+            tl.fromTo(
+                ".modal",
+                {
+                    opacity: 0,
+                },
+                {
+                    opacity: 1,
+                    duration: 0.75,
+                    ease: "steps(5)",
+                }
+            );
+        }
+    }, [isModalOpen]);
 
     return (
         <div className="modal">

@@ -25,7 +25,7 @@ export const useUpdateStore = create<updateStoreInterface>((set) => ({
             useActiveColorStore.setState({ activeColor: activeColor });
             useActiveFontFamilyStore.setState({ activeFontFamily: activeFont });
             useTimeStore.setState({ times: times });
-            useTimerStore.setState({ seconds: 59 });
+            useTimerStore.setState({ seconds: 59, status: "Start" });
             useProgressValueStore.setState({ value: 0 });
             return {
                 activeFontFamily:
