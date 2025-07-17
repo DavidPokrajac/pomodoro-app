@@ -26,8 +26,15 @@ export default function ButtonContainer() {
         const mm = gsap.matchMedia();
 
         if (activeItem === "pomodoro") {
-            gsap.to("span.button-container__button", {
-                left: 10,
+            mm.add("(min-width: 767px)", () => {
+                gsap.to("span.button-container__button", {
+                    left: 10,
+                });
+            });
+            mm.add("(max-width: 767px)", () => {
+                gsap.to("span.button-container__button", {
+                    left: 10,
+                });
             });
         }
         if (activeItem === "short-break") {
@@ -43,8 +50,15 @@ export default function ButtonContainer() {
             });
         }
         if (activeItem === "long-break") {
-            gsap.to("span.button-container__button", {
-                left: "calc(100% - 130px)",
+            mm.add("(min-width: 767px)", () => {
+                gsap.to("span.button-container__button", {
+                    left: "calc(100% - 130px)",
+                });
+            });
+            mm.add("(max-width: 767px)", () => {
+                gsap.to("span.button-container__button", {
+                    left: "calc(100% - 130px)",
+                });
             });
         }
     }, [activeItem]);
