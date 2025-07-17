@@ -42,11 +42,11 @@ export default function Page() {
                 <ModalDisplay />
             ) : (
                 <>
-                    <div className="first-part">
+                    <div className="header">
                         <Image src={pomodoro} alt="pomodoro logo" />
                         <ButtonContainer />
                     </div>
-                    <div className="second-part">
+                    <div className="timer">
                         <TimerDisplay />
                         <button
                             onClick={() => modalHandler()}

@@ -21,26 +21,26 @@ button {
     border: none;
 }
 
-.first-part {
+.header {
     display: flex;
     flex-direction: column;
     gap: 56px;
     align-items: center;
 }
 
-.second-part {
+.timer {
     display: flex;
     flex-direction: column;
     gap: 64px;
     align-items: center;
 }
 
-.second-part button {
+.timer button {
     background-color: transparent;
     border: none;
 }
 
-.second-part button:hover path {
+.timer button:hover path {
     color: var(--clr-blue-100);
     opacity: 1;
     cursor: pointer;

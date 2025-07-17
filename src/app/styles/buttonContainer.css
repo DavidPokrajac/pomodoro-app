@@ -61,6 +61,6 @@ span.button-container__button {
     z-index: 2;
 }
 
-.btn-active {
+.text-transparent {
     color: transparent;
 }
