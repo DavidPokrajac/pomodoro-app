@@ -74,7 +74,8 @@
 .modal__time-wrapper__options input {
     inline-size: 100%;
     background-color: var(--clr-blue-50);
-    color: var(--clr-blue-850);
+    /* color: var(--clr-blue-850); */
+    color: transparent;
     font-size: 13px;
     font-weight: bold;
     letter-spacing: 5px;
@@ -161,6 +162,18 @@
 
 .input-wrapper {
     position: relative;
+}
+
+.pomodoro-minutes,
+.short-break-minutes,
+.long-break-minutes {
+    position: absolute;
+    top: 13px;
+    left: 18px;
+    color: var(--clr-blue-850);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 5px;
 }
 
 .input-wrapper button {

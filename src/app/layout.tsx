@@ -6,6 +6,7 @@ import "./styles/variables.css";
 import "./styles/buttonContainer.css";
 import "./styles/timerDisplay.css";
 import "./styles/modalDisplay.css";
+import Intro from "./components/Intro";
 
 const kumbhSans = Kumbh_Sans({
     variable: "--font-kumbh-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
             <body
                 className={`${kumbhSans.variable} ${robotoSlab.variable} ${spaceMono.variable}`}
             >
+                <Intro />
                 {children}
             </body>
         </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUpdateStore } from "../stores/useUpdateStore";
 import { useResetStore } from "../stores/useResetStore";
 import { useTimeStore } from "../stores/useTimeStore";
@@ -60,6 +60,9 @@ export default function ModalDisplay() {
         (state: resetStoreInterface) => state.closeModalAndReset
     );
 
+    const container = useRef<HTMLDivElement>(null);
+    const { contextSafe } = useGSAP({ scope: container });
+
     useEffect(() => {
         if (!isModalOpen) {
             setTimeout(() => {
@@ -87,8 +90,184 @@ export default function ModalDisplay() {
         }
     }, [isModalOpen]);
 
+    const increasePomodoroMinutes = contextSafe(() => {
+        setTimes((prevValue: timeInterface) => {
+            return {
+                ...prevValue,
+                pomodoroMinutes: prevValue.pomodoroMinutes + 1,
+            };
+        });
+        const timeline = gsap.timeline({
+            defaults: { ease: "power1.out" },
+        });
+
+        timeline
+            .to(".pomodoro-minutes", {
+                opacity: 0,
+                y: 15,
+                duration: 0.1,
+            })
+            .to(".pomodoro-minutes", {
+                y: -15,
+                duration: 0.2,
+            })
+            .to(".pomodoro-minutes", {
+                opacity: 1,
+                y: 0,
+                duration: 0.2,
+            });
+    });
+
+    const decreasePomodoroMinutes = contextSafe(() => {
+        setTimes((prevValue: timeInterface) => {
+            return {
+                ...prevValue,
+                pomodoroMinutes: prevValue.pomodoroMinutes - 1,
+            };
+        });
+        const timeline = gsap.timeline({
+            defaults: { ease: "power1.out" },
+        });
+
+        timeline
+            .to(".pomodoro-minutes", {
+                opacity: 0,
+                y: -15,
+                duration: 0.1,
+            })
+            .to(".pomodoro-minutes", {
+                y: 15,
+                duration: 0.2,
+            })
+            .to(".pomodoro-minutes", {
+                opacity: 1,
+                y: 0,
+                duration: 0.2,
+            });
+    });
+
+    const increaseShortBreakMinutes = contextSafe(() => {
+        setTimes((prevValue: timeInterface) => {
+            return {
+                ...prevValue,
+                shortBreakMinutes: prevValue.shortBreakMinutes + 1,
+            };
+        });
+        const timeline = gsap.timeline({
+            defaults: { ease: "power1.out" },
+        });
+
+        timeline
+            .to(".short-break-minutes", {
+                opacity: 0,
+                y: 15,
+                duration: 0.1,
+            })
+            .to(".short-break-minutes", {
+                y: -15,
+                duration: 0.2,
+            })
+            .to(".short-break-minutes", {
+                opacity: 1,
+                y: 0,
+                duration: 0.2,
+            });
+    });
+
+    const decreaseShortBreakMinutes = contextSafe(() => {
+        setTimes((prevValue: timeInterface) => {
+            return {
+                ...prevValue,
+                shortBreakMinutes: prevValue.shortBreakMinutes - 1,
+            };
+        });
+        const timeline = gsap.timeline({
+            defaults: { ease: "power1.out" },
+        });
+
+        timeline
+            .to(".short-break-minutes", {
+                opacity: 0,
+                y: -15,
+                duration: 0.1,
+            })
+            .to(".short-break-minutes", {
+                y: 15,
+                duration: 0.2,
+            })
+            .to(".short-break-minutes", {
+                opacity: 1,
+                y: 0,
+                duration: 0.2,
+            });
+    });
+
+    const increaseLongBreakMinutes = contextSafe(() => {
+        setTimes((prevValue: timeInterface) => {
+            return {
+                ...prevValue,
+                longBreakMinutes: prevValue.longBreakMinutes + 1,
+            };
+        });
+        const timeline = gsap.timeline({
+            defaults: { ease: "power1.out" },
+        });
+
+        timeline
+            .to(".long-break-minutes", {
+                opacity: 0,
+                y: 15,
+                duration: 0.1,
+            })
+            .to(".long-break-minutes", {
+                y: -15,
+                duration: 0.2,
+            })
+            .to(".long-break-minutes", {
+                opacity: 1,
+                y: 0,
+                duration: 0.2,
+            });
+    });
+
+    const decreaseLongBreakMinutes = contextSafe(() => {
+        setTimes((prevValue: timeInterface) => {
+            return {
+                ...prevValue,
+                longBreakMinutes: prevValue.longBreakMinutes - 1,
+            };
+        });
+        const timeline = gsap.timeline({
+            defaults: { ease: "power1.out" },
+        });
+
+        timeline
+            .to(".long-break-minutes", {
+                opacity: 0,
+                y: -15,
+                duration: 0.1,
+            })
+            .to(".long-break-minutes", {
+                y: 15,
+                duration: 0.2,
+            })
+            .to(".long-break-minutes", {
+                opacity: 1,
+                y: 0,
+                duration: 0.2,
+            });
+    });
+
+    useEffect(() => {
+        setTimeout(() => {
+            document.querySelector<HTMLSpanElement>(
+                ".short-break-minutes"
+            )!.innerText = "" + times.shortBreakMinutes;
+        }, 900);
+    }, [times.shortBreakMinutes]);
+
     return (
-        <div className="modal">
+        <div className="modal" ref={container}>
             <div className="modal__head">
                 <h2 className="modal__head__title">Settings</h2>
                 <button onClick={() => closeModalAndReset()}>
@@ -101,6 +280,9 @@ export default function ModalDisplay() {
                     <div>
                         <label htmlFor="pomodoro">pomodoro</label>
                         <div className="input-wrapper">
+                            <span className="pomodoro-minutes">
+                                {times.pomodoroMinutes}
+                            </span>
                             <input
                                 type="number"
                                 name=""
@@ -111,29 +293,13 @@ export default function ModalDisplay() {
                             />
                             <button
                                 className="arrow-up-btn"
-                                onClick={() =>
-                                    setTimes((prevValue: timeInterface) => {
-                                        return {
-                                            ...prevValue,
-                                            pomodoroMinutes:
-                                                prevValue.pomodoroMinutes + 1,
-                                        };
-                                    })
-                                }
+                                onClick={() => increasePomodoroMinutes()}
                             >
                                 <ArrowUpIcon />
                             </button>
                             <button
                                 className="arrow-down-btn"
-                                onClick={() =>
-                                    setTimes((prevValue: timeInterface) => {
-                                        return {
-                                            ...prevValue,
-                                            pomodoroMinutes:
-                                                prevValue.pomodoroMinutes - 1,
-                                        };
-                                    })
-                                }
+                                onClick={() => decreasePomodoroMinutes()}
                                 disabled={times.pomodoroMinutes <= 0}
                             >
                                 <ArrowDownIcon />
@@ -143,6 +309,9 @@ export default function ModalDisplay() {
                     <div>
                         <label htmlFor="short-break">short break</label>
                         <div className="input-wrapper">
+                            <span className="short-break-minutes">
+                                {times.shortBreakMinutes}
+                            </span>
                             <input
                                 type="number"
                                 name=""
@@ -153,29 +322,13 @@ export default function ModalDisplay() {
                             />
                             <button
                                 className="arrow-up-btn"
-                                onClick={() =>
-                                    setTimes((prevValue: timeInterface) => {
-                                        return {
-                                            ...prevValue,
-                                            shortBreakMinutes:
-                                                prevValue.shortBreakMinutes + 1,
-                                        };
-                                    })
-                                }
+                                onClick={() => increaseShortBreakMinutes()}
                             >
                                 <ArrowUpIcon />
                             </button>
                             <button
                                 className="arrow-down-btn"
-                                onClick={() =>
-                                    setTimes((prevValue: timeInterface) => {
-                                        return {
-                                            ...prevValue,
-                                            shortBreakMinutes:
-                                                prevValue.shortBreakMinutes - 1,
-                                        };
-                                    })
-                                }
+                                onClick={() => decreaseShortBreakMinutes()}
                                 disabled={times.shortBreakMinutes <= 0}
                             >
                                 <ArrowDownIcon />
@@ -185,6 +338,9 @@ export default function ModalDisplay() {
                     <div>
                         <label htmlFor="long-break">long break</label>
                         <div className="input-wrapper">
+                            <span className="long-break-minutes">
+                                {times.longBreakMinutes}
+                            </span>
                             <input
                                 type="number"
                                 name=""
@@ -195,29 +351,13 @@ export default function ModalDisplay() {
                             />
                             <button
                                 className="arrow-up-btn"
-                                onClick={() =>
-                                    setTimes((prevValue: timeInterface) => {
-                                        return {
-                                            ...prevValue,
-                                            longBreakMinutes:
-                                                prevValue.longBreakMinutes + 1,
-                                        };
-                                    })
-                                }
+                                onClick={() => increaseLongBreakMinutes()}
                             >
                                 <ArrowUpIcon />
                             </button>
                             <button
                                 className="arrow-down-btn"
-                                onClick={() =>
-                                    setTimes((prevValue: timeInterface) => {
-                                        return {
-                                            ...prevValue,
-                                            longBreakMinutes:
-                                                prevValue.longBreakMinutes - 1,
-                                        };
-                                    })
-                                }
+                                onClick={() => decreaseLongBreakMinutes()}
                                 disabled={times.longBreakMinutes <= 0}
                             >
                                 <ArrowDownIcon />

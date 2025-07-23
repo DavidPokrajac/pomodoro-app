@@ -14,8 +14,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useUpdateStore } from "../stores/useUpdateStore";
 import { useTimeStore } from "../stores/useTimeStore";
+import { SplitText } from "gsap/all";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, SplitText);
 
 export default function TimerDisplay() {
     const activeItem = useActiveItemStore(

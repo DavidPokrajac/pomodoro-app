@@ -61,3 +61,28 @@ button {
         gap: 47px;
     }
 }
+
+.intro {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 5;
+    perspective: 1000px;
+    display: flex;
+}
+
+.intro__bit {
+    height: 100%;
+    width: 25%;
+    background-color: rgb(190, 194, 244);
+}
+
+.intro__welcome-message {
+    position: absolute;
+    top: 50%;
+    font-size: 5rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
